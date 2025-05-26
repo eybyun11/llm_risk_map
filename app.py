@@ -36,7 +36,7 @@ st.markdown("""
 
 # 상단 타이틀 & 설명
 st.markdown('<div class="main-title">🧠 LLM Risk Score Heatmap</div>', unsafe_allow_html=True)
-st.markdown('<div class="description">8종 프롬프트 유형과 32개 위험 카테고리에 대한 Risk Score를 시각화합니다.<br>이 대시보드는 모델의 위험 특성 클러스터링과 사전배포 평가 결과를 탐색하는 데 활용됩니다.</div>', unsafe_allow_html=True)
+st.markdown('<div class="description">AssureAI의 Risk Score를 시각화합니다.<br>이 대시보드는 모델의 위험 특성 클러스터링과 사전배포 평가 결과를 탐색하는 데 활용됩니다.</div>', unsafe_allow_html=True)
 
 # 데이터 생성
 risk_categories = [f"Category_{i+1}" for i in range(32)]
