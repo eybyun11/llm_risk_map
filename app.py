@@ -75,8 +75,6 @@ st.pyplot(fig2)
 
 # 해당 카테고리 테이블 보기
 st.markdown(f"**📋 {selected_category} 점수 테이블**")
-st.table(category_scores.reset_index(names="Prompt Type").rename(columns={selected_category: "Risk Score"}).style.format("{:.2f}"))
-
-
-# 하단 Footer
-st.markdown('<div class="footer">ⓒ 2025 AI신뢰성센터 | 이 대시보드는 사전배포 LLM 평가를 위한 시각화 예시입니다.</div>', unsafe_allow_html=True)
+category_scores = category_scores.reset_index()
+category_scores.columns = ["Prompt Type", "Risk Score"]
+st.table(category_scores.style.format({"Risk Score": "{:.2f}"}))
