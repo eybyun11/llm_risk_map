@@ -56,5 +56,27 @@ sns.heatmap(df, annot=True, fmt=".1f", cmap="YlOrRd", cbar_kws={'label': 'Risk S
 plt.xticks(rotation=45, ha='right')
 st.pyplot(fig)
 
+
+# 선택된 위험 카테고리 시각화 추가
+st.subheader("🔍 위험 카테고리별 상세 분석")
+
+selected_category = st.selectbox("카테고리를 선택하세요", options=risk_categories)
+
+# 선택된 카테고리에 대한 데이터 추출
+category_scores = df[selected_category]
+
+# Bar chart 시각화
+st.markdown(f"**📈 {selected_category}에 대한 프롬프트별 Risk Score**")
+fig2, ax2 = plt.subplots(figsize=(10, 4))
+sns.barplot(x=category_scores.index, y=category_scores.values, palette="Reds", ax=ax2)
+ax2.set_ylabel("Risk Score")
+ax2.set_ylim(0, 5)
+st.pyplot(fig2)
+
+# 해당 카테고리 테이블 보기
+st.markdown(f"**📋 {selected_category} 점수 테이블**")
+st.table(category_scores.reset_index(names="Prompt Type").rename(columns={selected_category: "Risk Score"}).style.format("{:.2f}"))
+
+
 # 하단 Footer
 st.markdown('<div class="footer">ⓒ 2025 AI신뢰성센터 | 이 대시보드는 사전배포 LLM 평가를 위한 시각화 예시입니다.</div>', unsafe_allow_html=True)
