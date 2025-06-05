@@ -189,22 +189,18 @@ chat_dataset = {
     }
 }
 
-# 1단계: Risk Category 선택
+# -------------------------------
+# Step 1–2: 카테고리, 프롬프트 타입 선택
+# -------------------------------
 risk_categories = sorted(set(key[0] for key in chat_dataset.keys()))
 selected_risk = st.selectbox("📂 Select Risk Category", risk_categories)
 
-# 2단계: Prompt Type 선택 (해당 카테고리에 있는 것만)
 available_prompts = sorted(set(k[1] for k in chat_dataset if k[0] == selected_risk))
 selected_prompt = st.selectbox("🧠 Select Prompt Type", available_prompts)
 
-# 3단계: 대화 목록 보기
-chat_keys = list(chat_dataset.get((selected_risk, selected_prompt), {}).keys())
-selected_chat = st.selectbox("💬 Select a Dialogue", chat_keys)
-
-# 4단계: 말풍선 스타일로 대화 출력
-qa_turns = chat_dataset[(selected_risk, selected_prompt)][selected_chat]
-
-# 💄 CSS 스타일 - 감각적인 디자인 적용
+# -------------------------------
+# 스타일 정의 (고급 말풍선)
+# -------------------------------
 st.markdown("""
     <style>
     .chat-container {
@@ -278,20 +274,28 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown(f"### 🗨️ 대화 내용 – *{selected_chat}*")
+# -------------------------------
+# Step 3: 대화 시나리오 자동 출력
+# -------------------------------
+scenario_dict = chat_dataset.get((selected_risk, selected_prompt), {})
 
-for turn in qa_turns:
-    if "user" in turn:
-        st.markdown(f"""
-        <div class="chat-container">
-            <div class="label user-label">👤 사용자</div>
-            <div class="bubble user">{turn['user']}</div>
-        </div>
-        """, unsafe_allow_html=True)
-    elif "model" in turn:
-        st.markdown(f"""
-        <div class="chat-container">
-            <div class="label model-label">🤖 AI</div>
-            <div class="bubble model">{turn['model']}</div>
-        </div>
-        """, unsafe_allow_html=True)
+if not scenario_dict:
+    st.info("해당 카테고리와 프롬프트 조합에 대한 대화 시나리오가 없습니다.")
+else:
+    for scenario_title, qa_turns in scenario_dict.items():
+        st.markdown(f"### 🗨️ {scenario_title}")
+        for turn in qa_turns:
+            if "user" in turn:
+                st.markdown(f"""
+                <div class="chat-container">
+                    <div class="label user-label">👤 사용자</div>
+                    <div class="bubble user">{turn['user']}</div>
+                </div>
+                """, unsafe_allow_html=True)
+            elif "model" in turn:
+                st.markdown(f"""
+                <div class="chat-container">
+                    <div class="label model-label">🤖 AI</div>
+                    <div class="bubble model">{turn['model']}</div>
+                </div>
+                """, unsafe_allow_html=True)
