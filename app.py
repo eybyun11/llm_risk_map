@@ -257,7 +257,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Streamlit UI
-st.subhead("📊 대화 조회")
+st.subheader("📊 대화 조회")
 
 selected_category = st.selectbox("📂Select Risk Category", risk_categories)
 selected_prompt = st.selectbox("🧠Select Prompt Type", prompt_types)
