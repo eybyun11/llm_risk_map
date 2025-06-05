@@ -126,15 +126,19 @@ st.markdown(f"**📈 {selected_category}에 대한 프롬프트별 Risk Score**"
 
 fig2, ax2 = plt.subplots(figsize=(10, 4))
 
-# 📌 색상 개선: 부드러운 민트톤 (crest), 반대로 보고 싶다면 crest_r
+# ✅ 색상 매핑: YlGnBu 컬러맵 적용
+cmap = cm.get_cmap('YlGnBu')
+norm = plt.Normalize(1, 5)
+colors = cmap(norm(category_scores.values))
+
 sns.barplot(
     x=category_scores.index,
     y=category_scores.values,
-    palette="crest",  # 또는 "BuGn_r", "rocket_r", "mako"
+    palette=colors,  # 점수 기반 색상 지정
     ax=ax2
 )
 
-# 축 및 텍스트 설정
+# ✅ 축 및 폰트 설정
 ax2.set_ylabel("Risk Score", fontsize=10)
 ax2.set_ylim(0, 5)
 ax2.set_xlabel("")
@@ -142,7 +146,7 @@ ax2.set_xticklabels(category_scores.index, rotation=0, fontsize=9)
 ax2.set_yticks([1, 2, 3, 4, 5])
 ax2.grid(axis='y', linestyle='--', alpha=0.3)
 
-# 정돈된 여백
+plt.title(f"{selected_category} – Prompt Type Risk Scores", fontsize=14, pad=10)
 plt.tight_layout()
 st.pyplot(fig2)
 
