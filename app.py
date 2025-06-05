@@ -262,6 +262,13 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# 사용자가 선택한 카테고리 및 프롬프트
+selected_category = st.selectbox("Select Risk Category", risk_categories)
+selected_prompt = st.selectbox("Select Prompt Type", prompt_types)
+
+# 선택 조합에 맞는 대화 리스트 필터링
+filtered_chats = chat_dataset.get((selected_category, selected_prompt), [])
+
 if filtered_chats:
     # 좌우 컬럼 UI
     col1, col2 = st.columns([1, 2])  # 비율 조정: 좌측 좁게, 우측 넓게
