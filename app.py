@@ -92,7 +92,8 @@ with st.expander("📋 시뮬레이션 데이터 보기"):
     st.dataframe(df.style.format("{:.2f}"))
 
 # Heatmap 시각화
-st.subheader("📊 위험 점수 Heatmap")fig, ax = plt.subplots(figsize=(10, 14))
+st.subheader("📊 위험 점수 Heatmap")
+fig, ax = plt.subplots(figsize=(10, 14))
 sns.heatmap(
     heatmap_data,
     annot=True,
