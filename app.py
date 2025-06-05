@@ -140,14 +140,14 @@ sns.barplot(
 )
 
 # ✅ 축 및 폰트 설정
-ax2.set_ylabel("Risk Score", fontsize=10)
+ax2.set_ylabel("Score", fontsize=10)
 ax2.set_ylim(0, 5)
 ax2.set_xlabel("")
 ax2.set_xticklabels(category_scores.index, rotation=0, fontsize=9)
 ax2.set_yticks([1, 2, 3, 4, 5])
 ax2.grid(axis='y', linestyle='--', alpha=0.3)
 
-plt.title(f"{selected_category} – Prompt Type Risk Scores", fontsize=14, pad=10)
+plt.title(f"{selected_category} – Prompt Type Scores", fontsize=14, pad=10)
 plt.tight_layout()
 st.pyplot(fig2)
 
