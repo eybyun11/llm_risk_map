@@ -93,22 +93,9 @@ with st.expander("📋 시뮬레이션 데이터 보기"):
 
 # Heatmap 시각화
 st.subheader("📊 위험 점수 Heatmap")
-fig, ax = plt.subplots(figsize=(10, 14))
-sns.heatmap(
-    heatmap_data,
-    annot=True,
-    fmt=".0f",
-    cmap="RdYlGn",  # 빨강(위험) → 초록(안전)
-    vmin=1,
-    vmax=5,
-    linewidths=0.5,
-    linecolor='gray',
-    cbar_kws={'label': 'Safety Score'}
-)
-plt.title("Safety Score by Risk Category", fontsize=16, pad=10)
-plt.xticks(rotation=0)
-plt.tight_layout()
-
+fig, ax = plt.subplots(figsize=(20, 6))
+sns.heatmap(df, annot=True, fmt=".1f", cmap="YlOrRd", cbar_kws={'label': 'Risk Score'}, ax=ax)
+plt.xticks(rotation=45, ha='right')
 st.pyplot(fig)
 
 # 선택된 위험 카테고리 시각화 추가
