@@ -39,8 +39,50 @@ st.markdown('<div class="main-title">🧠 LLM Risk Score Heatmap</div>', unsafe_
 st.markdown('<div class="description">AssureAI의 Risk Score를 시각화합니다.<br>이 대시보드는 모델의 위험 특성 클러스터링과 사전배포 평가 결과를 탐색하는 데 활용됩니다.</div>', unsafe_allow_html=True)
 
 # 데이터 생성
-risk_categories = [f"Category_{i+1}" for i in range(32)]
-prompt_types = [f"Prompt_{i+1}" for i in range(8)]
+risk_categories = [
+    "1. Celebrating Suffering (고통 찬양)",
+    "2. Violent Acts (폭력 행위)",
+    "3. Depicting Violence (폭력적 묘사)",
+    "4. Harassment (괴롭힘)",
+    "5. Hate Speech (독설)",
+    "6. Offensive Language (공격적 언어 표현)",
+    "7. Perpetuating Harmful Beliefs (부정적 고정 관념)",
+    "8. Adult Content (성인용 콘텐츠)",
+    "9. Erotic Content (선정적 콘텐츠)",
+    "10. Non-Consensual Nudity (비동의 누드)",
+    "11. Monetized Sexual Content (성적 콘텐츠 수익 창출)",
+    "12. Endangerment, Harm, or Abuse of Children (아동 유해물)",
+    "13. Child Sexual Abuse (아동 성적 학대)",
+    "14. Suicidal and Non-suicidal Self-injury (자살, 자해)",
+    "15. Political Persuasion (정치적 신조)",
+    "16. Influencing Politics (정치 영향)",
+    "17. Deterring Democratic Participation (민주주의적 참여 거부)",
+    "18. Fraud (도용)",
+    "19. Mis/disinformation (허위 정보)",
+    "20. Sowing Division (편 가르기)",
+    "21. Misrepresentation (정보 왜곡)",
+    "22. Types of Defamation (명예훼손)",
+    "23. Discriminatory Activities (차별적 표현)",
+    "24. Unauthorized Privacy Violations (개인정보 침해)",
+    "25. Illegal/Regulated Substances (불법 약물)",
+    "26. Illegal Services/Exploitation (불법적 착취)",
+    "27. Other Unlawful/Criminal Activities (기타 불법 행위)",
+    "28. Increased Inequality and Decline in Employment Quality (불평등 심화 및 고용 질 저하)",
+    "29. Economic and Cultural Devaluation of Human Effort (경제적, 문화적 가치 하락)",
+    "30. Competitive Dynamics (경쟁적 역학)",
+    "31. Overreliance and Unsafe Use (과도한 의존, 비안전한 사용)",
+    "32. Loss of Human Agency and Autonomy (인간의 주체성과 자율성 상실)"
+]
+prompt_types = [
+    "Multiple-Choice",
+    "Q Only",
+    "Multi-Session",
+    "Role-Playing",
+    "Chain of Thought",
+    "Expert Prompting",
+    "Rail",
+    "Reflection"
+]
 np.random.seed(42)
 data = np.random.uniform(0, 5, size=(8, 32))
 df = pd.DataFrame(data, index=prompt_types, columns=risk_categories)
