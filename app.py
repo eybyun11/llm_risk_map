@@ -36,8 +36,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # 상단 타이틀 & 설명
-st.markdown('<div class="main-title">🧠 LLM Risk Score Heatmap</div>', unsafe_allow_html=True)
-st.markdown('<div class="description">AssureAI의 Risk Score를 시각화합니다.<br>이 대시보드는 모델의 위험 특성 클러스터링과 사전배포 평가 결과를 탐색하는 데 활용됩니다.</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">🧠 LLM Safety Score Heatmap</div>', unsafe_allow_html=True)
+st.markdown('<div class="description">AssureAI의 Safety Score를 시각화합니다.<br>이 대시보드는 모델의 위험 특성 클러스터링과 사전배포 평가 결과를 탐색하는 데 활용됩니다.</div>', unsafe_allow_html=True)
 
 # 데이터 생성
 risk_categories = [
@@ -123,7 +123,7 @@ selected_category = st.selectbox("카테고리를 선택하세요", options=risk
 category_scores = df[selected_category]
 
 # 세련된 Bar Chart 시각화
-st.markdown(f"**📈 {selected_category}에 대한 프롬프트별 Risk Score**")
+st.markdown(f"**📈 {selected_category}에 대한 프롬프트별 Safety Score**")
 
 fig2, ax2 = plt.subplots(figsize=(10, 4))
 
@@ -154,8 +154,8 @@ st.pyplot(fig2)
 # 해당 카테고리 테이블 보기
 st.markdown(f"**📋 {selected_category} 점수 테이블**")
 category_scores = category_scores.reset_index()
-category_scores.columns = ["Prompt Type", "Risk Score"]
-st.table(category_scores.style.format({"Risk Score": "{:.2f}"}))
+category_scores.columns = ["Prompt Type", "Safety Score"]
+st.table(category_scores.style.format({"Safety Score": "{:.2f}"}))
 
 # 📌 샘플 QA 데이터 (선택된 Risk Category & Prompt Type에 해당)
 qa_example = [
@@ -169,61 +169,74 @@ qa_example = [
 selected_risk = st.selectbox("📂 Select a Risk Category", risk_categories)
 selected_prompt = st.selectbox("🧠 Select a Prompt Type", prompt_types)
 
-# 💄 말풍선 스타일 정의
+# 💄 CSS 스타일 - 감각적인 디자인 적용
 st.markdown("""
     <style>
     .chat-container {
-        margin-bottom: 20px;
+        margin-bottom: 24px;
+        width: 100%;
     }
     .bubble {
-        max-width: 85%;
-        padding: 12px 16px;
+        max-width: 80%;
+        padding: 14px 18px;
         border-radius: 16px;
         position: relative;
-        margin-bottom: 10px;
         font-size: 15px;
-        line-height: 1.5;
-        color: #222222;
-        box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.08);
+        line-height: 1.6;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+        color: #222;
     }
+
     .user {
-        background: #d2ecff;
+        background: linear-gradient(145deg, #d1e9ff, #b3daff);
         margin-left: auto;
-        margin-right: 10px;
+        margin-right: 12px;
         text-align: right;
     }
+
     .user:after {
         content: "";
         position: absolute;
         right: -10px;
-        top: 10px;
+        top: 12px;
         border-top: 10px solid transparent;
-        border-left: 10px solid #d2ecff;
+        border-left: 10px solid #b3daff;
         border-bottom: 10px solid transparent;
     }
+
     .model {
-        background: #e2f7e1;
+        background: linear-gradient(145deg, #d6f5e7, #b8eacb);
         margin-right: auto;
-        margin-left: 10px;
+        margin-left: 12px;
         text-align: left;
     }
+
     .model:before {
         content: "";
         position: absolute;
         left: -10px;
-        top: 10px;
+        top: 12px;
         border-top: 10px solid transparent;
-        border-right: 10px solid #e2f7e1;
+        border-right: 10px solid #b8eacb;
         border-bottom: 10px solid transparent;
     }
+
     .label {
-        font-weight: bold;
+        font-weight: 600;
         font-size: 16px;
-        margin: 2px 0 6px 4px;
+        margin-bottom: 6px;
     }
+
     .user-label {
         text-align: right;
-        margin-right: 10px;
+        margin-right: 12px;
+        color: #3182ce;
+    }
+
+    .model-label {
+        text-align: left;
+        margin-left: 12px;
+        color: #2f855a;
     }
     </style>
 """, unsafe_allow_html=True)
