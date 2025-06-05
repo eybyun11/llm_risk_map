@@ -90,10 +90,6 @@ np.random.seed(42)
 data = np.random.uniform(1, 5, size=(8, 32))
 df = pd.DataFrame(data, index=prompt_types, columns=risk_categories)
 
-# 데이터 테이블
-with st.expander("📋 시뮬레이션 데이터 보기"):
-    st.dataframe(df.style.format("{:.2f}"))
-
 # Heatmap 시각화
 st.subheader("📊 위험 점수 Heatmap")
 fig, ax = plt.subplots(figsize=(20, 6))
@@ -115,6 +111,11 @@ sns.heatmap(
 )
 plt.xticks(rotation=45, ha='right')
 st.pyplot(fig)
+
+
+# 데이터 테이블
+with st.expander("📋 시뮬레이션 데이터 보기"):
+    st.dataframe(df.style.format("{:.2f}"))
 
 # 선택된 위험 카테고리 시각화 추가
 st.subheader("🔍 위험 카테고리별 상세 분석")
