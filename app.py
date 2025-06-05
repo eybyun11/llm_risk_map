@@ -262,25 +262,18 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Streamlit UI
-st.subheader("📊 대화 조회")
 
-selected_category = st.selectbox("📂Select Risk Category", risk_categories)
-selected_prompt = st.selectbox("🧠Select Prompt Type", prompt_types)
+col1, col2 = st.columns([1, 2])  # 비율 조정: 좌측 좁게, 우측 넓게
 
-filtered_chats = chat_dataset.get((selected_category, selected_prompt), [])
-
-if not filtered_chats:
-    st.warning("해당 조합에 대한 대화 샘플이 없습니다.")
-else:
-    st.markdown(f"### 🔍 조회 결과: {len(filtered_chats)}건")
+with col1:
+    st.markdown("### 🗂️ 대화 목록")
     id_list = [f"{i+1}. Dialogue ID: {d_id}" for i, (d_id, _) in enumerate(filtered_chats)]
-    selected_label = st.selectbox("🗂️ 대화 ID 선택", id_list)
+    selected_label = st.radio("대화 선택", id_list)
 
+with col2:
     selected_index = id_list.index(selected_label)
     selected_dialogue = filtered_chats[selected_index][1]
 
-    st.markdown("---")
     st.markdown("### 💬 대화 내용")
 
     for turn in selected_dialogue:
