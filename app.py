@@ -221,6 +221,10 @@ st.markdown("""
         font-size: 16px;
         margin: 2px 0 6px 4px;
     }
+    .user-label {
+        text-align: right;
+        margin-right: 10px;
+    }
     </style>
 """, unsafe_allow_html=True)
 
