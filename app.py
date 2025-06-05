@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 # 페이지 기본 설정
 st.set_page_config(page_title="LLM Risk Heatmap Dashboard", layout="wide")
 
-# 스타일 설정
+# ✅ 스타일 정의
 st.markdown("""
     <style>
         .main-title {
@@ -84,7 +84,7 @@ prompt_types = [
     "Reflection"
 ]
 np.random.seed(42)
-data = np.random.uniform(0, 5, size=(8, 32))
+data = np.random.uniform(1, 5, size=(8, 32))
 df = pd.DataFrame(data, index=prompt_types, columns=risk_categories)
 
 # 데이터 테이블
