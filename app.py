@@ -4,6 +4,8 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
+import random
+import uuid
 
 # 페이지 기본 설정
 st.set_page_config(page_title="LLM Risk Heatmap Dashboard", layout="wide")
