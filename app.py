@@ -163,7 +163,9 @@ with st.expander(f"📋 {selected_category} 점수 테이블"):
     category_scores = category_scores.reset_index()
     category_scores.columns = ["Prompt Type", "Safety Score"]
     st.table(category_scores.style.format({"Safety Score": "{:.2f}"}))
-    
+
+st.markdown("---")
+
 # 샘플 대화 생성 함수
 def generate_sample_dialogue():
     return [
