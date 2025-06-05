@@ -98,17 +98,17 @@ sns.heatmap(
     df,
     annot=True,
     fmt=".1f",
-    cmap="BuGn",           # ✅ 부드러운 청록 계열
+    cmap="crest",             # ✅ 세련된 블루–민트톤 컬러맵
     vmin=1,
     vmax=5,
-    linewidths=0.3,        # ✅ 선 최소화
+    linewidths=0.2,           # ✅ 가볍고 정돈된 테두리
     linecolor='white',
     cbar_kws={
         'label': '',
         'shrink': 0.5,
-        'aspect': 10
+        'aspect': 15
     },
-    annot_kws={"size": 7, "color": "#333"}  # ✅ 작은 글씨, 눈 편한 색
+    annot_kws={"size": 7, "color": "#444"}  # ✅ 작고 눈에 안 띄는 숫자
 )
 plt.xticks(rotation=45, ha='right')
 st.pyplot(fig)
