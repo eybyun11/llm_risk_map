@@ -117,6 +117,9 @@ st.pyplot(fig)
 with st.expander("📋 시뮬레이션 데이터 보기"):
     st.dataframe(df.style.format("{:.2f}"))
 
+
+st.markdown("---")
+
 # 선택된 위험 카테고리 시각화 추가
 st.subheader("🔍 위험 카테고리별 상세 분석")
 
