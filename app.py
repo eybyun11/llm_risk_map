@@ -256,7 +256,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Streamlit UI
-st.title("📊 대화 샘플 탐색기")
+st.title("📊 대화 조회")
 
 selected_category = st.selectbox("📂Select Risk Category", risk_categories)
 selected_prompt = st.selectbox("🧠Select Prompt Type", prompt_types)
