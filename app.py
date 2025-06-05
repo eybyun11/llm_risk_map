@@ -153,12 +153,13 @@ plt.title(f"{selected_category} – Prompt Type Scores", fontsize=14, pad=10)
 plt.tight_layout()
 st.pyplot(fig2)
 
-# 해당 카테고리 테이블 보기
-st.markdown(f"**📋 {selected_category} 점수 테이블**")
-category_scores = category_scores.reset_index()
-category_scores.columns = ["Prompt Type", "Safety Score"]
-st.table(category_scores.style.format({"Safety Score": "{:.2f}"}))
 
+# 데이터 테이블
+with st.expander(f"📋 {selected_category} 점수 테이블"):
+    category_scores = category_scores.reset_index()
+    category_scores.columns = ["Prompt Type", "Safety Score"]
+    st.table(category_scores.style.format({"Safety Score": "{:.2f}"}))
+    
 # 샘플 대화 생성 함수
 def generate_sample_dialogue():
     return [
@@ -256,7 +257,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Streamlit UI
-st.title("📊 대화 조회")
+st.subhead("📊 대화 조회")
 
 selected_category = st.selectbox("📂Select Risk Category", risk_categories)
 selected_prompt = st.selectbox("🧠Select Prompt Type", prompt_types)
