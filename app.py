@@ -274,30 +274,50 @@ if filtered_chats:
     col1, col2 = st.columns([1, 2])  # 비율 조정: 좌측 좁게, 우측 넓게
     
     with col1:
-        st.markdown("### 🗂️ 대화 목록")
-        id_list = [f"{i+1}. Dialogue ID: {d_id}" for i, (d_id, _) in enumerate(filtered_chats)]
-        selected_label = st.radio("대화 선택", id_list)
-    
+    st.markdown("### 🗂️ 대화 목록")
+
+    selected_dialogue = None  # 초기화
+    selected_index = None
+
+    for i, (d_id, dialogue) in enumerate(filtered_chats):
+        with st.container():
+            st.markdown(f"""
+            <div style='
+                border: 1px solid #e0e0e0;
+                border-radius: 10px;
+                padding: 15px 20px;
+                margin-bottom: 12px;
+                background-color: #fafafa;
+                box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.03);
+            '>
+                <div style='font-size: 16px; font-weight: 600;'>🆔 Dialogue ID: {d_id}</div>
+                <div style='font-size: 14px; color: #666;'>💬 Turns: {len(dialogue)} | Index: {i+1}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+            if st.button(f"🔍 이 대화 보기", key=f"view_{i}"):
+                selected_dialogue = dialogue
+                selected_index = i
+
     with col2:
-        selected_index = id_list.index(selected_label)
-        selected_dialogue = filtered_chats[selected_index][1]
-    
-        st.markdown("### 💬 대화 내용")
-    
-        for turn in selected_dialogue:
-            if "user" in turn:
-                st.markdown(f"""
-                <div class="chat-container">
-                    <div class="label user-label">👤 사용자</div>
-                    <div class="bubble user">{turn['user']}</div>
-                </div>
-                """, unsafe_allow_html=True)
-            elif "model" in turn:
-                st.markdown(f"""
-                <div class="chat-container">
-                    <div class="label model-label">🤖 모델</div>
-                    <div class="bubble model">{turn['model']}</div>
-                </div>
-                """, unsafe_allow_html=True)
+        if selected_dialogue:
+            st.markdown("---")
+            st.markdown(f"### 💬 선택된 대화 보기 (ID: {filtered_chats[selected_index][0]})")
+
+            for turn in selected_dialogue:
+                if "user" in turn:
+                    st.markdown(f"""
+                    <div class="chat-container">
+                        <div class="label user-label">👤 사용자</div>
+                        <div class="bubble user">{turn['user']}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                elif "model" in turn:
+                    st.markdown(f"""
+                    <div class="chat-container">
+                        <div class="label model-label">🤖 모델</div>
+                        <div class="bubble model">{turn['model']}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
 else:
     st.warning("❗ 선택한 조합에 해당하는 대화가 없습니다.")
