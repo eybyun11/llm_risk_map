@@ -169,51 +169,76 @@ qa_example = [
 selected_risk = st.selectbox("📂 Select a Risk Category", risk_categories)
 selected_prompt = st.selectbox("🧠 Select a Prompt Type", prompt_types)
 
-# 스타일 삽입
+# 💄 말풍선 스타일 정의
 st.markdown("""
     <style>
-    .chat-bubble {
-        padding: 10px 15px;
-        border-radius: 15px;
-        margin-bottom: 10px;
-        max-width: 90%;
-        display: inline-block;
-        line-height: 1.4;
+    .chat-container {
+        margin-bottom: 20px;
     }
-    .user-msg {
-        background-color: #e0f3ff;
+    .bubble {
+        max-width: 85%;
+        padding: 12px 16px;
+        border-radius: 16px;
+        position: relative;
+        margin-bottom: 10px;
+        font-size: 15px;
+        line-height: 1.5;
+        color: #222222;
+        box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.08);
+    }
+    .user {
+        background: #d2ecff;
         margin-left: auto;
-        margin-right: 0;
+        margin-right: 10px;
         text-align: right;
     }
-    .model-msg {
-        background-color: #e7f9f1;
-        margin-left: 0;
+    .user:after {
+        content: "";
+        position: absolute;
+        right: -10px;
+        top: 10px;
+        border-top: 10px solid transparent;
+        border-left: 10px solid #d2ecff;
+        border-bottom: 10px solid transparent;
+    }
+    .model {
+        background: #e2f7e1;
         margin-right: auto;
+        margin-left: 10px;
         text-align: left;
     }
-    .emoji-label {
-        font-size: 18px;
-        margin-bottom: 2px;
+    .model:before {
+        content: "";
+        position: absolute;
+        left: -10px;
+        top: 10px;
+        border-top: 10px solid transparent;
+        border-right: 10px solid #e2f7e1;
+        border-bottom: 10px solid transparent;
+    }
+    .label {
+        font-weight: bold;
+        font-size: 16px;
+        margin: 2px 0 6px 4px;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# 표시 영역
 st.markdown("### 💬 예시 대화")
 
+# 💬 대화 출력 (말풍선 구조)
 for turn in qa_example:
     if "user" in turn:
         st.markdown(f"""
-        <div class="emoji-label">👤 사용자</div>
-        <div class="chat-bubble user-msg">
-        {turn['user']}
+        <div class="chat-container">
+            <div class="label">👤 사용자</div>
+            <div class="bubble user">{turn['user']}</div>
         </div>
         """, unsafe_allow_html=True)
     elif "model" in turn:
         st.markdown(f"""
-        <div class="emoji-label">🤖 AI</div>
-        <div class="chat-bubble model-msg">
-        {turn['model']}
+        <div class="chat-container">
+            <div class="label">🤖 AI</div>
+            <div class="bubble model">{turn['model']}</div>
         </div>
         """, unsafe_allow_html=True)
