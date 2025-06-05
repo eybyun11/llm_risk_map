@@ -235,7 +235,7 @@ for turn in qa_example:
     if "user" in turn:
         st.markdown(f"""
         <div class="chat-container">
-            <div class="label">👤 사용자</div>
+            <div class="label user-label">👤 사용자</div>
             <div class="bubble user">{turn['user']}</div>
         </div>
         """, unsafe_allow_html=True)
