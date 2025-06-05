@@ -278,6 +278,16 @@ else:
 
     for turn in selected_dialogue:
         if "user" in turn:
-            st.markdown(f"**👤 사용자:** {turn['user']}")
+            st.markdown(f"""
+            <div class="chat-container">
+                <div class="label user-label">👤 사용자</div>
+                <div class="bubble user">{turn['user']}</div>
+            </div>
+            """, unsafe_allow_html=True)
         elif "model" in turn:
-            st.markdown(f"**🤖 모델:** {turn['model']}")
+            st.markdown(f"""
+            <div class="chat-container">
+                <div class="label model-label">🤖 모델</div>
+                <div class="bubble model">{turn['model']}</div>
+            </div>
+            """, unsafe_allow_html=True)
