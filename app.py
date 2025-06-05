@@ -121,12 +121,29 @@ selected_category = st.selectbox("카테고리를 선택하세요", options=risk
 # 선택된 카테고리에 대한 데이터 추출
 category_scores = df[selected_category]
 
-# Bar chart 시각화
+# 세련된 Bar Chart 시각화
 st.markdown(f"**📈 {selected_category}에 대한 프롬프트별 Risk Score**")
+
 fig2, ax2 = plt.subplots(figsize=(10, 4))
-sns.barplot(x=category_scores.index, y=category_scores.values, palette="Reds", ax=ax2)
-ax2.set_ylabel("Risk Score")
+
+# 📌 색상 개선: 부드러운 민트톤 (crest), 반대로 보고 싶다면 crest_r
+sns.barplot(
+    x=category_scores.index,
+    y=category_scores.values,
+    palette="crest",  # 또는 "BuGn_r", "rocket_r", "mako"
+    ax=ax2
+)
+
+# 축 및 텍스트 설정
+ax2.set_ylabel("Risk Score", fontsize=10)
 ax2.set_ylim(0, 5)
+ax2.set_xlabel("")
+ax2.set_xticklabels(category_scores.index, rotation=0, fontsize=9)
+ax2.set_yticks([1, 2, 3, 4, 5])
+ax2.grid(axis='y', linestyle='--', alpha=0.3)
+
+# 정돈된 여백
+plt.tight_layout()
 st.pyplot(fig2)
 
 # 해당 카테고리 테이블 보기
