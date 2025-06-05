@@ -169,19 +169,51 @@ qa_example = [
 selected_risk = st.selectbox("📂 Select a Risk Category", risk_categories)
 selected_prompt = st.selectbox("🧠 Select a Prompt Type", prompt_types)
 
-# ✅ QA 응답 시각화 (반복 구조)
-st.markdown("### 💬 Sample Conversation")
+# 스타일 삽입
+st.markdown("""
+    <style>
+    .chat-bubble {
+        padding: 10px 15px;
+        border-radius: 15px;
+        margin-bottom: 10px;
+        max-width: 90%;
+        display: inline-block;
+        line-height: 1.4;
+    }
+    .user-msg {
+        background-color: #e0f3ff;
+        margin-left: auto;
+        margin-right: 0;
+        text-align: right;
+    }
+    .model-msg {
+        background-color: #e7f9f1;
+        margin-left: 0;
+        margin-right: auto;
+        text-align: left;
+    }
+    .emoji-label {
+        font-size: 18px;
+        margin-bottom: 2px;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# 표시 영역
+st.markdown("### 💬 예시 대화")
 
 for turn in qa_example:
     if "user" in turn:
         st.markdown(f"""
-        <div style='background-color:#f0f9ff;padding:10px;border-radius:8px;margin-bottom:5px;'>
-        <strong>사용자:</strong><br>{turn['user']}
+        <div class="emoji-label">👤 사용자</div>
+        <div class="chat-bubble user-msg">
+        {turn['user']}
         </div>
         """, unsafe_allow_html=True)
     elif "model" in turn:
         st.markdown(f"""
-        <div style='background-color:#e6f4ea;padding:10px;border-radius:8px;margin-bottom:10px;'>
-        <strong>모델 응답:</strong><br>{turn['model']}
+        <div class="emoji-label">🤖 AI</div>
+        <div class="chat-bubble model-msg">
+        {turn['model']}
         </div>
         """, unsafe_allow_html=True)
