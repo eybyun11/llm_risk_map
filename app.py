@@ -94,7 +94,7 @@ with st.expander("📋 시뮬레이션 데이터 보기"):
 # Heatmap 시각화
 st.subheader("📊 위험 점수 Heatmap")
 fig, ax = plt.subplots(figsize=(20, 6))
-sns.heatmap(df, annot=True, fmt=".1f", cmap="YlOrRd", cbar_kws={'label': 'Risk Score'}, ax=ax)
+sns.heatmap(df, annot=True, fmt=".1f", cmap="RdYlGn", cbar_kws={'label': 'Risk Score'}, ax=ax)
 plt.xticks(rotation=45, ha='right')
 st.pyplot(fig)
 
