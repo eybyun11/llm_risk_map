@@ -173,22 +173,23 @@ selected_prompt = st.selectbox("🧠 Select a Prompt Type", prompt_types)
 st.markdown("""
     <style>
     .chat-container {
-        margin-bottom: 24px;
+        margin-bottom: 28px;
         width: 100%;
     }
     .bubble {
         max-width: 80%;
-        padding: 14px 18px;
+        padding: 14px 20px;
         border-radius: 16px;
         position: relative;
-        font-size: 15px;
+        font-size: 15.2px;
         line-height: 1.6;
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-        color: #222;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+        color: #1e1e1e;
+        font-family: 'Segoe UI', sans-serif;
     }
 
     .user {
-        background: linear-gradient(145deg, #d1e9ff, #b3daff);
+        background: #dce3f0;
         margin-left: auto;
         margin-right: 12px;
         text-align: right;
@@ -200,12 +201,12 @@ st.markdown("""
         right: -10px;
         top: 12px;
         border-top: 10px solid transparent;
-        border-left: 10px solid #b3daff;
+        border-left: 10px solid #dce3f0;
         border-bottom: 10px solid transparent;
     }
 
     .model {
-        background: linear-gradient(145deg, #d6f5e7, #b8eacb);
+        background: #d3f3e2;
         margin-right: auto;
         margin-left: 12px;
         text-align: left;
@@ -217,20 +218,21 @@ st.markdown("""
         left: -10px;
         top: 12px;
         border-top: 10px solid transparent;
-        border-right: 10px solid #b8eacb;
+        border-right: 10px solid #d3f3e2;
         border-bottom: 10px solid transparent;
     }
 
     .label {
-        font-weight: 600;
-        font-size: 16px;
+        font-weight: 500;
+        font-size: 15px;
         margin-bottom: 6px;
+        font-family: 'Segoe UI', sans-serif;
     }
 
     .user-label {
         text-align: right;
         margin-right: 12px;
-        color: #3182ce;
+        color: #4a5568;
     }
 
     .model-label {
